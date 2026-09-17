@@ -11,21 +11,29 @@ int main(){
     float marks;
     char grades,name[30],filename[20];
     printf("Input file name:\n");
-    scanf("%s",filename);
+    scanf("%19s",filename);
     fp=fopen(filename,"w");
+    if(fp==NULL){
+        printf("Error: Could not open file for writing.\n");
+        return 1;
+    }
     printf("Input no of Student:\n");
     scanf("%d",&N);
     printf("Input Student Details:\n");
     printf("NAME      ROLL       MARKS      GRADES \n");
     for(i=1;i<N;i++){
-        fscanf(stdin,"%s %d %f %c\n",name,&roll,&marks,&grades);
+        fscanf(stdin,"%29s %d %f %c\n",name,&roll,&marks,&grades);
         fprintf(fp,"%s %d %.2f %c\n",name,roll,marks,grades);
     }
     fclose(fp);
     fp=fopen(filename,"r");
+    if(fp==NULL){
+        printf("Error: Could not open file for reading.\n");
+        return 1;
+    }
     printf("NAME      ROLL       MARKS       GRADES \n");
     for(i=0;i<N;i++){
-        fscanf(fp,"%s %d %f %c\n",name,&roll,&marks,&grades);
+        fscanf(fp,"%29s %d %f %c\n",name,&roll,&marks,&grades);
         fprintf(stdout,"%-8s %7d %8.2f %8c\n",name,roll,marks,grades);
     }
     fclose(fp);
